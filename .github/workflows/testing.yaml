@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -24,14 +23,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Run tests
+
+    - name: Run tests (optional)
       run: |
         if [ -d tests ]; then pytest -q; else echo "No tests directory found"; fi
 
-    - name: Lint (optional)
+    - name: Lint
       run: |
-        pip install flake
+        pip install flake8
         flake8 . || true
+
     - name: Build success
       run: echo "Build completed successfully!"
-    
